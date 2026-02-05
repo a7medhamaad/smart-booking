@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('provider_id')->constrained('users')->cascadeOnDelete(); // مقدم الخدمة
             $table->string('transaction_id')->nullable();
             $table->decimal('amount', 10, 2);
-            $table->string('status')->default('pending'); // pending, success, failed
+            $table->string('status')->default('pending'); 
             $table->timestamps();
         });
     }

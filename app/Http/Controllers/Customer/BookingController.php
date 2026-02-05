@@ -50,7 +50,7 @@ class BookingController extends Controller
 
         $existingBooking = Booking::where('user_id', auth()->id())
             ->where('service_id', $request->service_id)
-            ->whereIn('status', ['pending', 'confirmed']) // أو أي حالات تعتبر غير مكتملة
+            ->whereIn('status', ['pending', 'confirmed'])
             ->first();
 
         if ($existingBooking) {
@@ -59,7 +59,6 @@ class BookingController extends Controller
                 ->with('error', 'Service Can not Booking at this time Finsh service you Book and try later.');
         }
 
-        // احفظ البيانات مؤقتاً في الـ session
         session([
             'booking_data' => [
                 'service_id' => $request->service_id,
@@ -100,9 +99,7 @@ class BookingController extends Controller
     }
 
 
-    /**
-     * Show a specific booking details.
-     */
+
     public function show(Booking $booking)
     {
         $customer = Auth::user();

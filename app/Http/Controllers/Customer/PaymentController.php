@@ -60,11 +60,9 @@ class PaymentController extends Controller
                 'transaction_id' => 'txn_' . uniqid(),
             ]);
 
-            // ✅ استرجع بيانات الحجز اللي اتخزنت مؤقتاً
             $bookingData = session('booking_data');
 
             if ($bookingData) {
-                // احفظ الحجز في قاعدة البيانات
                 \App\Models\Booking::create([
                     'user_id' => Auth::id(),
                     'service_id' => $bookingData['service_id'],
@@ -72,7 +70,6 @@ class PaymentController extends Controller
                     'status' => 'confirmed',
                 ]);
 
-                // امسح البيانات من الـ session بعد التخزين
                 session()->forget('booking_data');
             }
         }
